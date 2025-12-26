@@ -48,6 +48,7 @@ export const pages = [
   {
     text: "You gave me strength without forcing it. You gave hope without promises.",
   },
+  { text: "You influence me in ways I never could have imagined." },
   {
     text: "Because of you, my world had lighted up because you always bring to light the things that I didn't know before.",
   },
@@ -69,7 +70,7 @@ export const pages = [
   {
     text: "I'm super proudly to say I survived the battles on my mind before it consumes me wholely.",
   },
-  { text: "And I'm super proud of you too! 🫶" },
+  { text: "And I'm super proud of you too!🫶" },
   {
     text: "Throughout the year. We fought our own brutal battles.",
   },
@@ -78,7 +79,7 @@ export const pages = [
     text: "Yet, even in the darkness, we found the smallest sparks of light. Of moments of laughter, of courage, of quiet persistence. Every challenge tested us, pushed us to our limits, and yet, here we are.",
   },
 
-  { text: "We conquered." },
+  { text: "We Conquered." },
   {
     text: "We Survived.",
   },
@@ -90,6 +91,7 @@ export const pages = [
   },
   {
     title: "Still Here",
+    text: "This exists because you did.",
   },
   {
     title: "Resilience",

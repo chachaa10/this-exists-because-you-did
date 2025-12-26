@@ -19,7 +19,7 @@ export default function App() {
   };
 
   const startMusic = () => {
-    musicRef.current.volume = 0.2;
+    musicRef.current.volume = 0.1;
     musicRef.current.loop = true;
     musicRef.current.play().catch((err) => console.log(err));
     setMusicStarted(true);
