@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import "./FlipBook.css";
 import { pages } from "./message.js";
 import flipSound from "../sounds/one-page-book-flip-101928.mp3";
@@ -6,36 +6,40 @@ import music from "../sounds/let-down.mp3";
 
 export default function App() {
   const [current, setCurrent] = useState(0);
+  const [musicStarted, setMusicStarted] = useState(false);
+
   const audioRef = useRef(null);
   const musicRef = useRef(null);
 
-  useEffect(() => {
-    if (musicRef.current) {
-      musicRef.current.volume = 0.2; // subtle volume
-      musicRef.current.play().catch((err) => {
-        console.log("Autoplay blocked or paused:", err);
-      });
+  const playFlipSound = () => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play();
     }
-  }, []); // empty dependency → runs once on mount
+  };
+
+  const startMusic = () => {
+    musicRef.current.volume = 0.2;
+    musicRef.current.loop = true;
+    musicRef.current.play().catch((err) => console.log(err));
+    setMusicStarted(true);
+  };
 
   const next = () => {
+    if (!musicStarted && musicRef.current) {
+      startMusic();
+    }
+
     if (current < pages.length) {
       setCurrent(current + 1);
-      playSound();
+      playFlipSound();
     }
   };
 
   const prev = () => {
     if (current > 0) {
       setCurrent(current - 1);
-      playSound();
-    }
-  };
-
-  const playSound = () => {
-    if (audioRef.current) {
-      audioRef.current.currentTime = 0; // restart
-      audioRef.current.play();
+      playFlipSound();
     }
   };
 
@@ -80,15 +84,19 @@ export default function App() {
         />
       </audio>
 
-      <audio
-        ref={audioRef}
-        loop
-      >
+      <audio ref={musicRef}>
         <source
           src={music}
           type="audio/mpeg"
         />
       </audio>
+
+      {!musicStarted && (
+        <button
+          onClick={startMusic}
+          className="start-music"
+        ></button>
+      )}
     </div>
   );
 }
